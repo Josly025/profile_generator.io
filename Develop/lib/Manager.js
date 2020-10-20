@@ -1,4 +1,6 @@
-// TODO: Write code to define and export the Manager class. HINT: This class should inherit from Employee.
+//Define and export the Manager class
+// Class inheritance from Parent class - Employee
+//adding officeNumber and getOfficerNumber
 
 const Employee = require("./Employee");
 

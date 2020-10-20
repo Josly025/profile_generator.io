@@ -1,4 +1,6 @@
-// TODO: Write code to define and export the Engineer class.  HINT: This class should inherit from Employee.
+// Define and export the Engineer class
+//Class inheritance from parent class -- Employee
+//Adding github and getGithub()
 
 const Employee = require("./Employee");
 
