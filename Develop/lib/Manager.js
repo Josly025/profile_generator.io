@@ -1,14 +1,19 @@
 // TODO: Write code to define and export the Manager class. HINT: This class should inherit from Employee.
 
-const employee = require("./Employee.js");
+const Employee = require("./Employee");
 
 //extends to link to Employee class
-class Manager extends employee {
-  constructor(officeNumber) {
+class Manager extends Employee {
+  constructor(name, id, email, officeNumber) {
     super(name, id, email); ///super add the parameters from Employee class
     this.officeNumber = officeNumber;
+  }
+  getOfficeNumber() {
+    return this.officeNumber;
   }
   getRole() {
     return "Manager";
   }
 }
+
+module.exports = Manager;

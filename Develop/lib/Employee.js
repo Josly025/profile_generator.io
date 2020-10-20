@@ -1,4 +1,5 @@
-// TODO: Write code to define and export the Employee class
+// Defining and exporting the Employee class (Parent Class!)
+// To be used for additional employee child classes
 
 class Employee {
   constructor(name, id, email) {
