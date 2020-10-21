@@ -9,11 +9,90 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
+const //empty array 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+//question code using inquirer
+inquirer
+  .prompt([
+    //employee prompts (class Employee)
+    {
+      type: "input",
+      message: "What is your name?",
+      name: "name",
+    },
+    {
+      type: "input",
+      message: "What is your employee id?",
+      name: "id",
+    },
+    {
+      type: "input",
+      message: "What is your employee email?",
+      name: "email",
+    },
+    {
+      type: "list",
+      message: "What is your employee position?",
+      name: "position",
+      choices: ["Manager", "Engineer", "Intern"],
+    },
+  ])
+  .then(function (response) {
+    console.log(response);
+    if (response.position === "Manager") {
+      //Manager prompt (class Manager)
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            message: "What is your office number?",
+            name: "officeNumber",
+          },
+        ])
+        .then(function (responsetwo) {
+          console.log(responsetwo);
+        });
+    }
+    if (response.position === "Engineer") {
+      // Prompt Engineer (class Engineer)
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            message: "What is your GitHub username?",
+            name: "github",
+          },
+        ])
+        .then(function (responsethree) {
+          console.log(responsethree);
+        });
+    }
+    if (response.position === "Intern") {
+      /// prompt Intern (class Intern)
+      inquirer
+        .prompt([
+          {
+            type: "input",
+            message: "What school do you attend?",
+            name: "school",
+          },
+        ])
+        .then(function (responsethree) {
+          console.log(responsethree);
+          const newIntern = new Intern(responsethree.school); //push array to render 
 
+        });
+    }
+  }).then(function (response){
+     
+      let renderHTML = render(); //new array for new object 
+  })
+//render function - pass in array of all employee objects -- return a block of html with divs for employee
+
+// Write code to use inquirer to gather information about the development team members,
+// and to create objects for each team member (using the correct classes as blueprints!)
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
