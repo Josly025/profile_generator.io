@@ -9,7 +9,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const //empty array 
+let member = [];
+//empty array that object string gets pushed to
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -39,9 +40,11 @@ inquirer
       choices: ["Manager", "Engineer", "Intern"],
     },
   ])
-  .then(function (response) {
-    console.log(response);
-    if (response.position === "Manager") {
+  .then(function (initalresponse) {
+    console.log(
+      "This is the inital response: " + JSON.stringify(initalresponse)
+    ); //log response
+    if (initalresponse.position === "Manager") {
       //Manager prompt (class Manager)
       inquirer
         .prompt([
@@ -52,10 +55,13 @@ inquirer
           },
         ])
         .then(function (responsetwo) {
-          console.log(responsetwo);
+          console.log("This is the Manager: " + JSON.stringify(responsetwo)); //log response
+          let newManager = new Manager(
+            JSON.stringify(responsetwo.officeNumber)
+          );
+          member.push(newManager);
         });
-    }
-    if (response.position === "Engineer") {
+    } else if (initalresponse.position === "Engineer") {
       // Prompt Engineer (class Engineer)
       inquirer
         .prompt([
@@ -66,10 +72,11 @@ inquirer
           },
         ])
         .then(function (responsethree) {
-          console.log(responsethree);
+          console.log("This is the Engineer: " + JSON.stringify(responsethree)); //log response
+          let newEngineer = new Engineer(JSON.stringify(responsethree.github));
+          member.push(newEngineer);
         });
-    }
-    if (response.position === "Intern") {
+    } else if (initalresponse.position === "Intern") {
       /// prompt Intern (class Intern)
       inquirer
         .prompt([
@@ -79,16 +86,24 @@ inquirer
             name: "school",
           },
         ])
-        .then(function (responsethree) {
-          console.log(responsethree);
-          const newIntern = new Intern(responsethree.school); //push array to render 
-
+        .then(function (responsefour) {
+          console.log("This is the Intern: " + JSON.stringify(responsefour)); //log the response
+          let newIntern = new Intern(JSON.stringify(responsefour.school));
+          member.push(newIntern); //push array to render
         });
     }
-  }).then(function (response){
-     
-      let renderHTML = render(); //new array for new object 
-  })
+
+    //render function
+    function renderHTML(response) {
+      console.log("This is the memeber array: " + JSON.stringify(member));
+      // render(member); //new array for new object
+      console.log("This is the end log: " + response); //log the array we are pushing to
+    }
+    renderHTML();
+  });
+
+//calling renderHTMl function //add render inside
+
 //render function - pass in array of all employee objects -- return a block of html with divs for employee
 
 // Write code to use inquirer to gather information about the development team members,
